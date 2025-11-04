@@ -9,19 +9,16 @@ def multiply(a, b):
 
 def divide(a, b):
     if b == 0:
-        # Raising an exception for better error handling
         raise ZeroDivisionError("Cannot divide by zero")
     return a / b
 
-# Initialize a list to store the operation history
 history = [] 
-MAX_HISTORY = 5 # Limit the number of history items displayed
+MAX_HISTORY = 5 
 
 def get_valid_number(prompt):
     """Function to repeatedly prompt for a valid number input."""
     while True:
         try:
-            # Use strip() to remove leading/trailing spaces
             return float(input(prompt).strip()) 
         except ValueError:
             print("❌ Invalid input. Please enter numbers only.")
@@ -33,15 +30,19 @@ def display_history():
         return
     
     print("\n--- Recent History ---")
-    # Display the last 5 operations (or fewer)
     for i, (op_str, res) in enumerate(history[-MAX_HISTORY:], 1): 
-        print(f"[{i}]: {op_str} = {res}")
+        
+        if isinstance(res, (float, int)):
+            display_res = f"{res:.2f}"
+        else:
+            display_res = str(res)
+            
+        print(f"[{i}]: {op_str} = {display_res}")
     print("-------------------------\n")
 
 def main():
     print("✨ Welcome to the Interactive Python Calculator! ✨")
     
-    # Mapping choices to the corresponding function and symbol
     operations = {
         '1': ("+", add),
         '2': ("-", subtract),
@@ -72,29 +73,32 @@ def main():
             print("⚠️ Invalid choice. Please try again.")
             continue
 
-        # Get the operation function and symbol
         symbol, operation_func = operations[choice]
 
         try:
             num1 = get_valid_number("Enter first number: ")
             num2 = get_valid_number("Enter second number: ")
             
-            # Perform the calculation
+            # perform calculation
             result = operation_func(num1, num2)
 
-            # Create the operation string for history
+            # operation string for history
             op_string = f"{num1} {symbol} {num2}"
 
-            # Display the result with clearer formatting
-            print(f"\n✅ Result of {op_string} is: {result}")
+            if isinstance(result, (float, int)):
+                display_result = f"{result:.2f}"
+            else:
+                display_result = str(result)
             
-            # Add to history
+            # display the result
+            print(f"\n✅ Result of {op_string} is: {display_result}")
+            
+            # save results to history
             history.append((op_string, result))
 
         except ZeroDivisionError as e:
             print(f"❌ Error: {e}")
         except Exception as e:
-            # Handle other potential general errors
             print(f"❌ An unexpected error occurred: {e}")
 
 
