@@ -6,4 +6,4 @@ A simple calculator that supports basic arithmetic operations (add, sub, mul, di
 
 ## Run locally
 ```bash
-python app/calculator.py add 5 3
+python app/calculator.py
