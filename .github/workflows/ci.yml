@@ -1,21 +1,17 @@
-name: Python Calculator CI
+name: Calculator CI
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+on: [push, pull_request]
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v3
+      - name: Setup Python
+        uses: actions/setup-python@v4
         with:
           python-version: '3.10'
-      - name: Install dependencies
+      - name: Install pytest
         run: pip install pytest
       - name: Run tests
         run: pytest -q

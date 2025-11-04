@@ -1,31 +1,55 @@
-import argparse
+def add(a, b):
+    return a + b
 
-def add(x, y):
-    return x + y
+def subtract(a, b):
+    return a - b
 
-def subtract(x, y):
-    return x - y
+def multiply(a, b):
+    return a * b
 
-def multiply(x, y):
-    return x * y
+def divide(a, b):
+    if b == 0:
+        return "Error: Cannot divide by zero"
+    return a / b
 
-def divide(x, y):
-    if y == 0:
-        return "Error: Division by zero"
-    return x / y
+
+def main():
+    while True:
+        print("\n=== Simple Calculator ===")
+        print("1. Add")
+        print("2. Subtract")
+        print("3. Multiply")
+        print("4. Divide")
+        print("5. Exit")
+
+        choice = input("Choose an operation (1-5): ")
+
+        if choice == '5':
+            print("Exiting calculator. Goodbye!")
+            break
+
+        if choice not in ['1', '2', '3', '4']:
+            print("Invalid choice. Please try again.")
+            continue
+
+        try:
+            num1 = float(input("Enter first number: "))
+            num2 = float(input("Enter second number: "))
+        except ValueError:
+            print("Invalid input. Please enter numbers only.")
+            continue
+
+        if choice == '1':
+            result = add(num1, num2)
+        elif choice == '2':
+            result = subtract(num1, num2)
+        elif choice == '3':
+            result = multiply(num1, num2)
+        elif choice == '4':
+            result = divide(num1, num2)
+
+        print(f"Result: {result}")
+
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Simple Calculator CLI")
-    parser.add_argument("operation", choices=["add", "sub", "mul", "div"], help="Operation to perform")
-    parser.add_argument("x", type=float, help="First number")
-    parser.add_argument("y", type=float, help="Second number")
-    args = parser.parse_args()
-
-    if args.operation == "add":
-        print(add(args.x, args.y))
-    elif args.operation == "sub":
-        print(subtract(args.x, args.y))
-    elif args.operation == "mul":
-        print(multiply(args.x, args.y))
-    elif args.operation == "div":
-        print(divide(args.x, args.y))
+    main()
