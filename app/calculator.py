@@ -9,8 +9,8 @@ def multiply(a, b):
 
 def divide(a, b):
     if b == 0:
-        # Raising an exception for better error handling
-        raise ZeroDivisionError("Cannot divide by zero")
+        # Ubah dari 'raise ZeroDivisionError' menjadi 'return string'
+        return "Error: Cannot divide by zero" 
     return a / b
 
 # Initialize a list to store the operation history
