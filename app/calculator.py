@@ -9,8 +9,8 @@ def multiply(a, b):
 
 def divide(a, b):
     if b == 0:
-        # Ubah dari 'raise ZeroDivisionError' menjadi 'return string'
-        return "Error: Cannot divide by zero" 
+        # Raising an exception for better error handling
+        raise ZeroDivisionError("Cannot divide by zero")
     return a / b
 
 # Initialize a list to store the operation history
@@ -50,7 +50,7 @@ def main():
     }
 
     while True:
-        print("\n=== Simple Calculator ===")
+        print("\n=== Calculator Menu ===")
         print("1. Addition (+)")
         print("2. Subtraction (-)")
         print("3. Multiplication (*)")
